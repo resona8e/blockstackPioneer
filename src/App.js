@@ -1,25 +1,51 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-
+import 'stylesheets/main.scss';
+import { Button } from 'react-bulma-components';
+import { appConfig } from 'utils/constants';
+import { UserSession } from 'blockstack'
+import Login from 'components/Login'
 class App extends Component {
+  state = {
+    userSession: new UserSession({ appConfig })
+  }
+
+
+  componentDidMount = async () => {
+    const { userSession } = this.state
+
+    if (!userSession.isUserSignedIn() && userSession.isSignInPending()) {
+      const userData = await userSession.handlePendingSignIn()
+
+      if (!userData.username) {
+        throw new Error("This app requires a username")
+      }
+
+      window.location = "/"
+
+    }
+  }
+
+  handleSignOut = () => {
+    const { userSession } = this.state
+    userSession.redirectToSignOut()
+    window.location = "/"
+  }
+
   render() {
+    const { userSession } = this.state
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      {
+        userSession.isUserSignedIn() ?
+        <Button color="primary" onClick={this.handleSignOut}>
+        Sign Out
+        </Button>:
+        <Login userSession={userSession} />
+        
+      } 
+        
+        
+        
       </div>
     );
   }
