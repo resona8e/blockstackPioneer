@@ -1,17 +1,18 @@
 {
-  "name": "music",
+  "name": "pioneermusic",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "blockstack": "^19.0.0-alpha.2",
     "lodash": "^4.17.11",
     "node-sass": "^4.11.0",
-    "opennode": "^1.1.1",
     "react": "^16.8.6",
     "react-bulma-components": "^3.0.1-4",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.0",
-    "react-scripts": "^2.1.8"
+    "react-scripts": "^2.1.8",
+    "react-sound": "^1.2.0",
+    "save": "^2.3.3"
   },
   "scripts": {
     "start": "react-app-rewired start",

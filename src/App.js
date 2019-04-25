@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
 import 'stylesheets/main.scss';
-import { Button } from 'react-bulma-components';
-import { appConfig } from 'utils/constants';
+import { Container } from 'react-bulma-components'
+import { appConfig } from 'utils/constants'
 import { UserSession } from 'blockstack'
 import Login from 'components/Login'
+import NavbarComp from 'components/Navbar'
+import Routes from 'pages/routes'
+import logo from './logo.svg';
+import { async } from 'q';
+
 class App extends Component {
   state = {
     userSession: new UserSession({ appConfig })
   }
-
 
   componentDidMount = async () => {
     const { userSession } = this.state
@@ -17,38 +21,31 @@ class App extends Component {
       const userData = await userSession.handlePendingSignIn()
 
       if (!userData.username) {
-        throw new Error("This app requires a username")
+        throw new Error('This app requires a username')
       }
 
-      window.location = "/"
-
+      window.location = '/'
     }
-  }
-
-  handleSignOut = () => {
-    const { userSession } = this.state
-    userSession.redirectToSignOut()
-    window.location = "/"
   }
 
   render() {
     const { userSession } = this.state
+
     return (
       <div className="App">
-      {
-        userSession.isUserSignedIn() ?
-        <Button color="primary" onClick={this.handleSignOut}>
-        Sign Out
-        </Button>:
-        <Login userSession={userSession} />
-        
-      } 
-        
-        
-        
+        <NavbarComp userSession={userSession} />
+        <Container>
+          {
+            userSession.isUserSignedIn() ?
+            <Routes userSession={userSession} /> :
+            <Login userSession={userSession} />
+          }
+        </Container>
       </div>
     );
   }
 }
 
 export default App;
+
+
