@@ -5,6 +5,8 @@ import AdminPostCreate from 'pages/admin/_username/posts/create'
 import "_variables.sass"
 import AdminPosts from 'pages/admin/_username/posts'
 import AdminPostView from 'pages/admin/_username/posts/_post_id'
+import AdminPostEdit from 'pages/admin/_username/posts/_post_id/edit'
+
 
 class AdminUsernamePostRoutes extends Component {
     static propTypes = {
@@ -29,7 +31,7 @@ class AdminUsernamePostRoutes extends Component {
                 />
                 Route 
                     path={`${this.props.match.url}/:post_id/edit`}
-                    render={() => <div>Admin edit page</div>}
+                    render={({ match }) => <AdminPostEdit match={match} />}
                 />
 
 

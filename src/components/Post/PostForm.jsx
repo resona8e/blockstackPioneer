@@ -24,8 +24,8 @@ class PostForm extends Component {
     const { post = {} } = props
 
     this.state = {
-      title: post.title || '', // returns an edited post or starting a new post
-      description: post.description || '', // returns an edited post or starting a new post
+      title: post.title || '', 
+      description: post.description || '', 
       posts: [],
     }
   }
@@ -59,13 +59,13 @@ class PostForm extends Component {
     const { title, description, posts } = this.state
     const { history, userSession, username, post } = this.props
 
-    // for posts.json
+    
     const params = {
       id: post.id,
       title,
     }
 
-    // for post-${post-id}.json
+    
     const detailParams = {
       ...params,
       description,
@@ -100,14 +100,13 @@ class PostForm extends Component {
     const { history, userSession, username } = this.props
     const id = generateUUID()
 
-    // for posts.json
+   
     const params = {
       id,
       title,
     }
 
-    // for post-${post-id}.json
-    // { id, title, description }
+   
     const detailParams = {
       ...params,
       description
