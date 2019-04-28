@@ -56,7 +56,7 @@ export class NavbarComp extends Component {
           <Navbar color="info" fixed="top" active={open}>
             <Navbar.Brand>
              <Navbar.Item>
-               <p>"Name of DApp"</p>  
+               <p>"Blockstack Music DApp name"</p>  
              </Navbar.Item>
 
              <Navbar.Burger
@@ -69,7 +69,7 @@ export class NavbarComp extends Component {
                   isSignedIn &&
                   <React.Fragment>
                       <Navbar.Item onClick={this.goToAdminProfile}>
-                          Resume
+                          Discography
                       </Navbar.Item>
                       <Navbar.Item onClick={this.goToProfile}>
                           Arist Profile
